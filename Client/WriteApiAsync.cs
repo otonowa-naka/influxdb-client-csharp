@@ -74,7 +74,7 @@ namespace InfluxDB.Client
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
-        public Task WriteRecordsAsync(WritePrecision precision, List<string> records, CancellationToken cancellationToken = default)
+        public Task WriteRecordsAsync(WritePrecision precision, IEnumerable<string> records, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(precision, nameof(precision));
 
@@ -89,7 +89,7 @@ namespace InfluxDB.Client
         /// <param name="precision">specifies the precision for the unix timestamps within the body line-protocol</param>
         /// <param name="records">specifies the record in InfluxDB Line Protocol</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
-        public Task WriteRecordsAsync(string bucket, string org, WritePrecision precision, List<string> records, CancellationToken cancellationToken = default)
+        public Task WriteRecordsAsync(string bucket, string org, WritePrecision precision, IEnumerable<string> records, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
@@ -198,7 +198,7 @@ namespace InfluxDB.Client
         /// </summary>
         /// <param name="points">specifies the Data points to write into bucket</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
-        public Task WritePointsAsync(List<PointData> points, CancellationToken cancellationToken = default)
+        public Task WritePointsAsync(IEnumerable<PointData> points, CancellationToken cancellationToken = default)
         {
             return WritePointsAsync(_options.Bucket, _options.Org, points, cancellationToken);
         }
@@ -210,7 +210,7 @@ namespace InfluxDB.Client
         /// <param name="org">specifies the destination organization for writes</param>
         /// <param name="points">specifies the Data points to write into bucket</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
-        public async Task WritePointsAsync(string bucket, string org, List<PointData> points, CancellationToken cancellationToken = default)
+        public async Task WritePointsAsync(string bucket, string org, IEnumerable<PointData> points, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
@@ -315,7 +315,7 @@ namespace InfluxDB.Client
         /// <param name="measurements">specifies Measurements to write into bucket</param>
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <typeparam name="TM">measurement type</typeparam>
-        public Task WriteMeasurementsAsync<TM>(WritePrecision precision, List<TM> measurements, CancellationToken cancellationToken = default)
+        public Task WriteMeasurementsAsync<TM>(WritePrecision precision, IEnumerable<TM> measurements, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNotNull(precision, nameof(precision));
 
@@ -332,7 +332,7 @@ namespace InfluxDB.Client
         /// <param name="cancellationToken">specifies the token to monitor for cancellation requests</param>
         /// <typeparam name="TM">measurement type</typeparam>
         public Task WriteMeasurementsAsync<TM>(string bucket, string org, WritePrecision precision,
-            List<TM> measurements, CancellationToken cancellationToken = default)
+            IEnumerable<TM> measurements, CancellationToken cancellationToken = default)
         {
             Arguments.CheckNonEmptyString(bucket, nameof(bucket));
             Arguments.CheckNonEmptyString(org, nameof(org));
